@@ -10,6 +10,7 @@ const UserProfile = () => {
 				<i class="circular users icon"></i>
 				{user.username}
 			</h2>
+			
 		</Container>
 	)
 }

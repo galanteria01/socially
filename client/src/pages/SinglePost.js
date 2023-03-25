@@ -43,6 +43,7 @@ const SinglePost = (props) => {
 	if (loading) {
 		postMarkup = (<p>Loading Post...</p>)
 	} else {
+		console.log(data)
 		const { id, body, createdAt, username, comments, likes, likeCount, commentCount } = data.getPost;
 		postMarkup = (
 			<Grid>
@@ -83,11 +84,11 @@ const SinglePost = (props) => {
 						</Card>
 
 						{user && (
-							<CommentAddCard 
-							comment={comment} 
-							setComment={setComment} 
-							submitComment={submitComment} 
-							ref={commentInputRef}
+							<CommentAddCard
+								comment={comment}
+								setComment={setComment}
+								submitComment={submitComment}
+								ref={commentInputRef}
 							/>
 							// <Card fluid>
 							// 	<Card.Content>
