@@ -4,9 +4,8 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-
-    ApolloProvider
-,
+  ApolloProvider
+  ,
   document.getElementById('root')
 );
 
