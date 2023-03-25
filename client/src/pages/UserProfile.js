@@ -6,11 +6,10 @@ const UserProfile = () => {
 	const { user } = useContext(AuthContext);
 	return (
 		<Container>
-			<h2 class="ui center aligned icon header">
-				<i class="circular users icon"></i>
+			<h2 className="ui center aligned icon header">
+				<i className="circular users icon"></i>
 				{user.username}
 			</h2>
-			
 		</Container>
 	)
 }

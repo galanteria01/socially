@@ -40,8 +40,8 @@ const Login = (props) => {
 	return (
 		<Container>
 			<Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
-				<h2 class="ui center aligned icon header">
-					<i class="circular users icon"></i>
+				<h2 className="ui center aligned icon header">
+					<i className="circular users icon"></i>
 					Login
 				</h2>
 				<Form.Input
