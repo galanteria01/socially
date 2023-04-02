@@ -12,14 +12,14 @@ const PostCard = ({ post: { body, createdAt, username, id, likeCount, commentCou
 
 	return (
 		<Card fluid>
-			<Card.Content>
+			<Card.Content as={Link} to={`/posts/${id}`}>
 				<Image
 					floated='right'
 					size='mini'
 					src='https://semantic-ui.com/images/avatar/large/elliot.jpg'
 				/>
 				<Card.Header>{username}</Card.Header>
-				<Card.Meta as={Link} to={`/posts/${id}`}>{moment(createdAt).fromNow()}</Card.Meta>
+				<Card.Meta >{moment(createdAt).fromNow()}</Card.Meta>
 				<Card.Description>
 					{body}
 				</Card.Description>

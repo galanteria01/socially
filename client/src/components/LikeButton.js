@@ -48,7 +48,7 @@ const LikeButton = ({ post: { id, likes, likeCount } }) => {
 					</Button>
 				)
 			}
-			<Label as='a' basic color='teal'>
+			<Label as='a' basic color='teal' pointing="left">
 				{likeCount}
 			</Label>
 		</Button>

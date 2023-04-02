@@ -8,6 +8,8 @@ import LikeButton from '../components/LikeButton';
 import { AuthContext } from '../context/auth';
 import CommentCard from '../components/CommentCard';
 import CommentAddCard from '../components/CommentAddCard';
+import CommentButton from '../components/CommentButton';
+import ShareButton from '../components/ShareButton';
 
 const SinglePost = (props) => {
 	const postId = props.match.params.postId;
@@ -70,14 +72,8 @@ const SinglePost = (props) => {
 								<hr />
 								<Card.Content extra>
 									<LikeButton post={{ id, likes, likeCount }} />
-									<Button as='div' labelPosition="right">
-										<Button basic color="blue">
-											<Icon name="comments" />
-										</Button>
-										<Label basic color="blue" pointing="left">
-											{commentCount}
-										</Label>
-									</Button>
+									<CommentButton commentCount={commentCount} />
+									<ShareButton postId={id} />
 									{user && user.username === username && <DeleteButton postId={id} callback={deletePostCallback} />}
 								</Card.Content>
 							</Card.Content>

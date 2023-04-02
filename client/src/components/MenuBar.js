@@ -12,7 +12,7 @@ const MenuBar = () => {
 	const handleItemClick = (e, { name }) => setActive(name)
 
 	const logUserOut = () => {
-		handleItemClick();
+		// handleItemClick();
 		logout();
 	}
 
