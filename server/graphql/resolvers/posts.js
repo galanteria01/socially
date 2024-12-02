@@ -1,3 +1,4 @@
+const { GraphQLError } = require("graphql");
 const Post = require("../../models/Post");
 const checkAuth = require("../../utils/check-auth");
 const { AuthenticationError } = require("@apollo/server");
@@ -29,12 +30,15 @@ module.exports = {
   Mutation: {
     async createPost(_, { body }, context) {
       if (body.trim() === "") {
-        throw new Error("Post body cannot be empty");
+        throw new GraphQLError("Post body must not be empty", {
+          extensions: {
+            code: 500,
+          },
+        });
       }
 
       try {
         const user = checkAuth(context);
-        console.log(user);
 
         const newPost = new Post({
           body,
@@ -50,7 +54,8 @@ module.exports = {
         });
         return post;
       } catch (e) {
-        throw new Error("Post body must not be empty");
+        console.log(e)
+        throw new GraphQLError("Post body must not be empty");
       }
     },
 

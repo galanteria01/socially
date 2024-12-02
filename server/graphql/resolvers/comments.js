@@ -1,18 +1,21 @@
 const {
-  UserInputError,
   AuthenticationError,
 } = require("@apollo/server/errors");
 const Post = require("../../models/Post");
 const checkAuth = require("../../utils/check-auth");
+const { GraphQLError } = require("graphql");
 
 module.exports = {
   Mutation: {
     createComment: async (_, { postId, body }, context) => {
       const { username } = checkAuth(context);
       if (body.trim() === "") {
-        throw new UserInputError("Empty Comment", {
-          errors: {
-            body: "Comment body must not be empty",
+        throw new GraphQLError("Empty Comment", {
+          extensions: {
+            code: 500,
+            errors: {
+              body: "Comment body must not be empty",
+            },
           },
         });
       }
@@ -27,7 +30,11 @@ module.exports = {
         await post.save();
         return post;
       } else {
-        throw new UserInputError("Post not found");
+        throw new GraphQLError("Post not found", {
+          extensions: {
+            code: 404,
+          },
+        });
       }
     },
 
@@ -45,7 +52,11 @@ module.exports = {
           throw new AuthenticationError("Action not allowed");
         }
       } else {
-        throw new UserInputError("Post not found");
+        throw new GraphQLError("Post not found", {
+          extensions: {
+            code: 404,
+          },
+        });
       }
     },
   },

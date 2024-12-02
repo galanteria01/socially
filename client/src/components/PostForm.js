@@ -44,7 +44,7 @@ const PostForm = () => {
 						value={values.body}
 						style={{ minHeight: 100, borderRadius: 10 }}
 					/>
-					<MenuAddMedia />
+					{/* <MenuAddMedia /> */}
 					<Button type="submit" color="teal">
 						Submit post
 					</Button>

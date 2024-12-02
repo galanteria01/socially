@@ -6,10 +6,12 @@ import { AuthContext } from '../context/auth';
 const MenuBar = () => {
 
 	const pathName = window.location.pathname;
-	const path = pathName === "/" ? 'home' : pathName.substr(1);
+	const path = pathName === "/" ? 'home' : pathName.substring(1);
 	const [active, setActive] = useState(path);
 
 	const handleItemClick = (e, { name }) => setActive(name)
+
+	console.log(path)
 
 	const logUserOut = () => {
 		// handleItemClick();
@@ -20,7 +22,7 @@ const MenuBar = () => {
 
 	return (
 		user ?
-			<Menu pointing secondary size="massive" color="green">
+			<Menu pointing secondary size="massive" color="violet">
 				<Menu.Item
 					name="home"
 					active={active === 'home'}
@@ -31,14 +33,24 @@ const MenuBar = () => {
 					<Icon name="home" />
 					Home
 				</Menu.Item>
+				<Menu.Item
+					name="peoples"
+					active={active === 'peoples'}
+					onClick={handleItemClick}
+					as={Link}
+					to="/peoples"
+				>
+					<Icon name="group" />
+					Peoples
+				</Menu.Item>
 
 				<Menu.Menu position='right'>
 					<Menu.Item
 						name={user.username}
+						active={active === "user"}
 						onClick={handleItemClick}
 						as={Link}
 						to="/user"
-						active={active === "user"}
 					>
 						<Icon name="user" />
 						{user.username}
@@ -56,7 +68,7 @@ const MenuBar = () => {
 				</Menu.Menu>
 			</Menu>
 			:
-			<Menu pointing secondary size="massive" color="green">
+			<Menu pointing secondary size="massive" color="violet">
 				<Menu.Item
 					name='home'
 					active={active === 'home'}

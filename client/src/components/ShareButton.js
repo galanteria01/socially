@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Button, Confirm, Icon, Modal } from 'semantic-ui-react'
 
 const ShareButton = ({ id }) => {
-  console.log(window.location.href)
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen(!open);
   const handleConfirm = () => {
@@ -20,7 +19,7 @@ const ShareButton = ({ id }) => {
         actions={['Snooze', { key: 'done', content: 'Done', positive: true }]}
       /> */}
       <Button onClick={toggle} as='button' labelPosition="right">
-        <Button basic color="purple">
+        <Button basic color="violet">
           <Icon name="share" />
         </Button>
       </Button>

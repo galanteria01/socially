@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Icon, Menu } from 'semantic-ui-react'
+import { FormInput, Icon, Menu } from 'semantic-ui-react'
 
 const MenuAddMedia = () => {
 	const [item, setItem] = useState('')
@@ -10,6 +10,7 @@ const MenuAddMedia = () => {
 				active={item === 'image'}
 				onClick={setItem}
 			>
+				<FormInput label='Enter Password' type='file' />
 				<Icon name='image' />
 			</Menu.Item>
 		</Menu>

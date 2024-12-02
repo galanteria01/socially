@@ -18,7 +18,7 @@ const CommentAddCard = ({ comment, setComment, submitComment, ref }) => {
             />
             <button
               type="submit"
-              className="ui button teal"
+              className="ui button violet"
               disabled={comment.trim() === ''}
               onClick={submitComment}
             >

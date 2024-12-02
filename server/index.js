@@ -14,7 +14,7 @@ const pubsub = new PubSub();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ req, pubsub }),
+  
 });
 
 //Connect to server
@@ -23,6 +23,7 @@ mongoose
   .then(async () => {
     return await startStandaloneServer(server, {
       listen: { port: 5001 },
+      context: ({ req }) => ({ req, pubsub }),
     });
   })
   .then(({ url }) => {

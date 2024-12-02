@@ -1,11 +1,11 @@
 const User = require("../../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { UserInputError } = require("@apollo/server");
 const {
   validateRegisterInput,
   validateLoginInput,
 } = require("../../utils/validators");
+const { GraphQLError } = require("graphql");
 
 const generateToken = (user) => {
   return jwt.sign(
@@ -25,21 +25,40 @@ module.exports = {
       const { errors, valid } = validateLoginInput(username, password);
 
       if (!valid) {
-        throw new UserInputError("Fields are not properly formatted", {
-          errors,
+        // throw new UserInputError("Fields are not properly formatted", {
+        //   errors,
+        // });
+
+        throw new GraphQLError("Fields are not properly formatted", {
+          extensions: {
+            code: "500",
+            errors
+          },
         });
       }
 
       const user = await User.findOne({ username });
       if (!user) {
         errors.general = "User not found";
-        throw new UserInputError("User doesn't exists", { errors });
+        // throw new UserInputError("User doesn't exists", { errors });
+        throw new GraphQLError("User doesn't exists", {
+          extensions: {
+            code: "500",
+            errors
+          },
+        });
       }
 
       const match = await bcrypt.compare(password, user.password);
 
       if (!match) {
-        throw new UserInputError("Credentials are invalid", { errors });
+        // throw new UserInputError("Credentials are invalid", { errors });
+        throw new GraphQLError("Credentials are invalid", {
+          extensions: {
+            code: "500",
+            errors
+          },
+        });
       }
       const token = generateToken(user);
 
@@ -64,15 +83,24 @@ module.exports = {
       );
 
       if (!valid) {
-        throw new UserInputError("Errors", { errors });
+        throw new GraphQLError("Fields are not properly formatted", {
+          extensions: {
+            code: "500",
+            errors
+          },
+        });
       }
       const user = await User.findOne({ username });
       if (user) {
-        throw new UserInputError("Username is taken", {
-          errors: {
-            username: "This username is taken",
+        throw new GraphQLError("Username is taken", {
+          extensions: {
+            code: "500",
+            errors: {
+              username: "This username is taken",
+            },
           },
         });
+
       }
 
       hashedPassword = await bcrypt.hash(password, 12);

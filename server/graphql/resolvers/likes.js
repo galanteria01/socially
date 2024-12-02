@@ -1,4 +1,4 @@
-const { UserInputError } = require("@apollo/server/errors");
+const { GraphQLError } = require("graphql");
 const Post = require("../../models/Post");
 const checkAuth = require("../../utils/check-auth");
 
@@ -21,7 +21,11 @@ module.exports = {
         await post.save();
         return post;
       } else {
-        throw new UserInputError("Post not found");
+        throw new GraphQLError("Post not found", {
+          extensions: {
+            code: 404,
+          },
+        });
       }
     },
   },

@@ -45,7 +45,6 @@ const SinglePost = (props) => {
 	if (loading) {
 		postMarkup = (<p>Loading Post...</p>)
 	} else {
-		console.log(data)
 		const { id, body, createdAt, username, comments, likes, likeCount, commentCount } = data.getPost;
 		postMarkup = (
 			<Grid>
